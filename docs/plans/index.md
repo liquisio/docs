@@ -16,6 +16,7 @@ webhook.
 1. **[Installation](./installation.md)** — install the app + package and wire the backend.
 2. **[Connect Stripe](./connect-stripe.md)** — connect your Stripe account and finish setup.
 3. **[Creating & displaying plans](./plans-setup.md)** — create plans and add them to your page.
+4. **[Settings](./settings.md)** — fine-tune checkout & Billing Portal behavior.
 
 ## Add-on features
 

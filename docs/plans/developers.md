@@ -1,6 +1,6 @@
 ---
 sidebar_label: "For developers"
-sidebar_position: 6
+sidebar_position: 7
 description: "Extension points such as a custom webhook logger."
 ---
 

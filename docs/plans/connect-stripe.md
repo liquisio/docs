@@ -35,10 +35,13 @@ For each mode you want to sell in:
    re-verifies the install prerequisites (site, members, labels, roles,
    package), so it doubles as your "is everything wired?" view.
 
-> The site URL is auto-detected; override it in **Settings** if detection is
-> wrong. **Connect with Stripe** is powered by the Plans LQ platform — if it
-> errors with *Invalid or expired state* or *Server not configured*, that's a
+> **Connect with Stripe** is powered by the Plans LQ platform — if it errors
+> with *Invalid or expired state* or *Server not configured*, that's a
 > platform-side issue, so reach out to support.
+
+Checkout and Billing Portal behavior — automatic tax, promotion codes, plan
+switching, cancellation timing, and more — is configured separately in
+[Settings](./settings.md) (the site-URL override lives there too).
 
 ## A note on test mode
 

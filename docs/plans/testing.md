@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Testing"
-sidebar_position: 5
+sidebar_position: 6
 description: "Run a full subscribe-to-role flow with a Stripe test account."
 ---
 
@@ -87,7 +87,7 @@ If you set the mode dropdown to **Test** in step 1, your published site already
 routes every buyer to Stripe test — just subscribe with a test card below. To
 instead test on a **live** site without redirecting real buyers, leave the mode
 on **Live** and append `?lqTest=<token>` to your plans page URL (generate the
-token in Settings; it routes only that link to test). Test cards:
+token in [Settings](./settings.md); it routes only that link to test). Test cards:
 
 | Scenario | Card number | Extra |
 |---|---|---|

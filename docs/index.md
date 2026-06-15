@@ -19,7 +19,7 @@ Sell subscriptions on your Wix site through **your own Stripe account**, with
 member roles and contact labels granted automatically via a single Stripe
 webhook.
 
-- [Installation & Setup](./plans/setup.md) — install the app, wire the backend, and create plans.
+- [Get started](./plans/index.md) — install the app, connect Stripe, and create plans.
 - [Testing](./plans/testing.md) — run a full subscribe-to-role flow with a Stripe test account.
 
 ---

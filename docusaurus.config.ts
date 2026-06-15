@@ -94,7 +94,7 @@ const config: Config = {
           items: [
             {
               label: 'Plans LQ',
-              to: '/plans/setup',
+              to: '/plans',
             },
           ],
         },

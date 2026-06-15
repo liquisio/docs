@@ -1,12 +1,17 @@
 name: Deploy to GitHub Pages
 
 on:
+  # Deploy when the docs repo itself changes.
   push:
     branches: [main]
-  # Allow manual runs from the Actions tab.
+  # Nightly backstop: rebuild from the latest liquisio/plans source docs.
+  # 07:00 UTC daily. Cron is UTC-only; adjust the hour to taste.
+  schedule:
+    - cron: '0 7 * * *'
+  # Manual trigger from the Actions tab (use this to test the sync on demand).
   workflow_dispatch:
 
-# Permissions needed for the GitHub Pages deployment (Pages source = "GitHub Actions").
+# Permissions for the GitHub Pages deployment (Pages source = "GitHub Actions").
 permissions:
   contents: read
   pages: write
@@ -22,18 +27,40 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      # Pull the source docs from the (private) product repo so the prebuild
+      # `npm run sync` can regenerate docs/plans/*.md from the latest
+      # package/*.md. Requires a repo secret `PLANS_REPO_TOKEN`: a fine-grained
+      # PAT (or GitHub App token) with **Contents: Read-only on liquisio/plans**.
+      # continue-on-error means a missing/expired token won't fail the deploy —
+      # the sync script then falls back to the committed copies in this repo.
+      - name: Checkout plans source (private)
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          repository: liquisio/plans
+          path: .plans-src
+          token: ${{ secrets.PLANS_REPO_TOKEN }}
+          persist-credentials: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - name: Install dependencies
         run: npm ci
-      # Note: `npm run build` triggers the `prebuild` sync, which no-ops in CI
-      # because the product repos aren't checked out — it builds the committed
-      # docs. Run `npm run sync` locally to refresh them from the source repos.
+
+      # `npm run build` runs the `prebuild` sync first. PLANS_REPO points it at
+      # the checkout above; if that dir is absent (token failure), sync no-ops
+      # and the committed docs are built instead.
       - name: Build site
         run: npm run build
+        env:
+          PLANS_REPO: ${{ github.workspace }}/.plans-src
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

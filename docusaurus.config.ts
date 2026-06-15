@@ -15,11 +15,12 @@ const config: Config = {
   // that npm frequently fails to install across machines. The standard webpack
   // bundler has no native deps and is plenty fast for a docs site.
 
-  // Production URL and base path. The repo is `liquisio/docs`, so GitHub Pages
-  // serves it from https://liquisio.github.io/docs/. (If you later point a
-  // custom domain at it, set url to that domain and baseUrl to '/'.)
-  url: 'https://liquisio.github.io',
-  baseUrl: '/docs/',
+  // Production URL and base path. The site is served from the custom domain
+  // docs.liquis.io (configured via the CNAME file in static/), so url is the
+  // domain and baseUrl is '/'. (For the bare GitHub Pages URL it would be
+  // url: 'https://liquisio.github.io' and baseUrl: '/docs/'.)
+  url: 'https://docs.liquis.io',
+  baseUrl: '/',
 
   // GitHub Pages deployment config.
   organizationName: 'liquisio',
@@ -48,8 +49,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Serve docs at the site root so URLs are /docs/<product>/... rather
-          // than /docs/docs/<product>/... (baseUrl already contributes /docs/).
+          // Serve docs at the site root so URLs are /<product>/... rather than
+          // /docs/<product>/....
           routeBasePath: '/',
         },
         blog: false,
